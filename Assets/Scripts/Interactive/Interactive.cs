@@ -9,6 +9,7 @@ public class Interactive : MonoBehaviour
         if (itemName == requireItem && !isDone) {
             isDone = true;
             OnClickedAction();
+            EventHandler.CallItemUsedEvent(itemName);
         }
     }
 

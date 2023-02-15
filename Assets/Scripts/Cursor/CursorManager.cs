@@ -12,11 +12,13 @@ public class CursorManager : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+        EventHandler.ItemUsedEvent += OnItemUsedEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
+        EventHandler.ItemUsedEvent -= OnItemUsedEvent;
     }
 
     private void Update() {
@@ -37,6 +39,13 @@ public class CursorManager : MonoBehaviour
             currentItem = itemDetails.itemName;
         }
         hand.gameObject.SetActive(holdItem);
+    }
+
+    private void OnItemUsedEvent(ItemName obj)
+    {
+        currentItem = ItemName.None;
+        holdItem = false;
+        hand.gameObject.SetActive(false);
     }
 
     private void ClickAction(GameObject clickObject) {
