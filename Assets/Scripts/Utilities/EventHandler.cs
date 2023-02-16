@@ -31,4 +31,8 @@ public static class EventHandler
         ChangeItemEvent?.Invoke(index);
     }
 
+    public static event Action<string> ShowDialogueEvent;
+    public static void CallShowDialogueEvent(string dialogue) {
+        ShowDialogueEvent?.Invoke(dialogue);
+    }
 }
