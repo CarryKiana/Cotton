@@ -8,11 +8,26 @@ public class TransitionManager : Singleton<TransitionManager>
     public float fadeDuration;
     private bool isFade;
 
+    private bool canTransition;
+
     private void Start() {
         StartCoroutine(TransitionToScene(string.Empty, startScene));
     }
+    private void OnEnable ()
+    {
+        EventHandler.GameStateChangeEvent += OnGameStateChangeEvent;
+    }
+    private void OnDisable ()
+    {
+        EventHandler.GameStateChangeEvent -= OnGameStateChangeEvent;
+    }
+
+    private void OnGameStateChangeEvent(GameState gameState)
+    {
+        canTransition = gameState == GameState.GamePlay;
+    }
     public void Transtion(string from, string to) {
-        if (!isFade) {
+        if (!isFade && canTransition) {
             StartCoroutine(TransitionToScene(from, to));
         }
     }

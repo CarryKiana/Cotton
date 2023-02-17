@@ -17,11 +17,11 @@ public DialogueData_SO dialogueEmpty;
   {
     dialogueEmptyStack = new Stack<string>();
     dialogueFinishStack = new Stack<string>();
-    for (int i = dialogueEmpty.dialogList.Count - 1; i > -1; i++)
+    for (int i = dialogueEmpty.dialogList.Count - 1; i > -1; i--)
     {
       dialogueEmptyStack.Push(dialogueEmpty.dialogList[i]);
     }
-    for (int i = dialogueFinish.dialogList.Count - 1; i > -1; i++)
+    for (int i = dialogueFinish.dialogList.Count - 1; i > -1; i--)
     {
       dialogueFinishStack.Push(dialogueFinish.dialogList[i]);
     }
@@ -54,10 +54,12 @@ public DialogueData_SO dialogueEmpty;
         EventHandler.CallShowDialogueEvent(result);
         yield return null;
         isTalking = false;
+        EventHandler.CallGameStateChangeEvent(GameState.Pause);
     } else {
         EventHandler.CallShowDialogueEvent(string.Empty);
         FillDialogueStack();
         isTalking = false;
+        EventHandler.CallGameStateChangeEvent(GameState.GamePlay);
     }
   }
 }
