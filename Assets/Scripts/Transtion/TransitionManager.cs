@@ -8,7 +8,7 @@ public class TransitionManager : Singleton<TransitionManager>
     public float fadeDuration;
     private bool isFade;
 
-    private bool canTransition = true;
+    private bool canTransition;
 
     private void Start() {
         StartCoroutine(TransitionToScene(string.Empty, startScene));
