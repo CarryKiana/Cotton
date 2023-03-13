@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1245d70418d75344ba80c4ed8e2fa0fa, type: 3}
   m_Name: GameH2A_Week1
   m_EditorClassIdentifier: 
+  gameName: H2A
   ballDataList:
   - ballName: 1
     wrongSprite: {fileID: 21300000, guid: 4c77efa74c5999c49a7a575c9c794e09, type: 3}

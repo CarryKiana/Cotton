@@ -45,4 +45,10 @@ public static class EventHandler
     public static void CallCheckGameStateEvent() {
         CheckGameStateEvent?.Invoke();
     }
+
+    public static event Action<string> GamePassEvent;
+    public static void CallGamePassEvent(string gameName)
+    {
+        GamePassEvent?.Invoke(gameName);
+    }
 }
