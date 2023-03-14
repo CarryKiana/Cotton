@@ -10,9 +10,9 @@ public class TransitionManager : Singleton<TransitionManager>
 
     private bool canTransition;
 
-    private void Start() {
-        StartCoroutine(TransitionToScene(string.Empty, startScene));
-    }
+    // private void Start() {
+    //     StartCoroutine(TransitionToScene(string.Empty, startScene));
+    // }
     private void OnEnable ()
     {
         EventHandler.GameStateChangeEvent += OnGameStateChangeEvent;

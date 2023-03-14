@@ -8,4 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Persistent.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/H1.unity
+    guid: 25a1084cb8cd104459464195d63582e0
+  - enabled: 1
+    path: Assets/Scenes/H2.unity
+    guid: 2a5e11de8301e6841bb5f12968748439
+  - enabled: 1
+    path: Assets/Scenes/H3.unity
+    guid: 4c79cfcfea83d1a40a5326dfa0dd8cb6
+  - enabled: 1
+    path: Assets/Scenes/H4.unity
+    guid: d30d0da18e29d2b4a953488f9070b792
+  - enabled: 1
+    path: Assets/Scenes/H2A.unity
+    guid: ff114818d28abf64d99eac3fb7176490
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 77770b05b4f580a40a28003871bc6b04
   m_configObjects: {}
