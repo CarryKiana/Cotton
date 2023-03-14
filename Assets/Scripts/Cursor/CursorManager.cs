@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CursorManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class CursorManager : MonoBehaviour
         if (hand.gameObject.activeInHierarchy) {
             hand.position = Input.mousePosition;
         }
+        if (InteractWithUI()) return;
+        
         if (canClick && Input.GetMouseButtonDown(0)) {
             ClickAction(ObjectAtMousePosition().gameObject);
         }
@@ -73,5 +76,17 @@ public class CursorManager : MonoBehaviour
 
     private Collider2D ObjectAtMousePosition() {
         return Physics2D.OverlapPoint(mouseWorldPos);
+    }
+
+    private bool InteractWithUI ()
+    {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

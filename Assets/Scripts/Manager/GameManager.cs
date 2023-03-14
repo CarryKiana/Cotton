@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable ()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+        EventHandler.GamePassEvent += OnGamePassEvent;
     }
 
     private void OnDisable ()
     {
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+        EventHandler.GamePassEvent -= OnGamePassEvent;
     }
 
     void Start()
@@ -30,5 +32,9 @@ public class GameManager : MonoBehaviour
                 miniGame.UpdateMiniGameState();
             }
         }
+    }
+    private void OnGamePassEvent (string gameName)
+    {
+        miniGameStateDict[gameName] = true;
     }
 }
