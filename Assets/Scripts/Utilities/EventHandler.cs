@@ -51,4 +51,10 @@ public static class EventHandler
     {
         GamePassEvent?.Invoke(gameName);
     }
+
+    public static event Action<int> StartNewGameEvent;
+    public static void CallStartNewGameEvent(int gameweek)
+    {
+        StartNewGameEvent?.Invoke(gameweek);
+    }
 }

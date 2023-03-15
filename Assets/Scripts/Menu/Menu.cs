@@ -19,4 +19,8 @@ public class Menu : MonoBehaviour
         TransitionManager._instance.Transtion(currentScene, "Menu");
         // 保存游戏进度
     }
+    public void StartGameWeek(int gameweek)
+    {
+        EventHandler.CallStartNewGameEvent(gameweek);
+    }
 }
