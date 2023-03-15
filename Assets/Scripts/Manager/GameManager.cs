@@ -5,17 +5,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private Dictionary<string, bool> miniGameStateDict = new Dictionary<string, bool>();
+    private GameController currentGame;
+    private int gameWeek;
 
     private void OnEnable ()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.GamePassEvent += OnGamePassEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
     }
 
     private void OnDisable ()
     {
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.GamePassEvent -= OnGamePassEvent;
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+    }
+    private void OnStartNewGameEvent (int gameWeek)
+    {
+        this.gameWeek = gameWeek;
+        miniGameStateDict.Clear();
     }
 
     void Start()
@@ -34,6 +43,9 @@ public class GameManager : MonoBehaviour
                 miniGame.UpdateMiniGameState();
             }
         }
+        currentGame = FindObjectOfType<GameController>();
+
+        currentGame?.SetGameWeekData(gameWeek);
     }
     private void OnGamePassEvent (string gameName)
     {

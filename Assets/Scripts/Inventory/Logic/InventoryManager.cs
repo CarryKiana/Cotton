@@ -16,6 +16,7 @@ public class InventoryManager : Singleton<InventoryManager>
         EventHandler.ItemUsedEvent += OnItemUsedEvent;
         EventHandler.ChangeItemEvent += OnChangeItemEvent;
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
     }
 
     private void OnDisable()
@@ -23,6 +24,11 @@ public class InventoryManager : Singleton<InventoryManager>
         EventHandler.ItemUsedEvent -= OnItemUsedEvent;
         EventHandler.ChangeItemEvent -= OnChangeItemEvent;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+    }
+    private void OnStartNewGameEvent (int obj)
+    {
+       itemList.Clear(); 
     }
 
     private void OnItemUsedEvent(ItemName itemName)

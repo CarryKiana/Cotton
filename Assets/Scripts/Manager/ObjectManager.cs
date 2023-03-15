@@ -10,12 +10,19 @@ public class ObjectManager : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.UpdateUIEvent += OnUpdadeUIEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
     }
 
     private void OnDisable() {
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.UpdateUIEvent -= OnUpdadeUIEvent;
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+    }
+    private void OnStartNewGameEvent (int obj)
+    {
+        itemAvailableDict.Clear();
+        interactiveStateDict.Clear();
     }
 
     private void OnBeforeSceneUnloadEvent() {

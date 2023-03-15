@@ -5,6 +5,7 @@ public class GameController : Singleton<GameController>
    public UnityEvent OnFinish;
    [Header("游戏数据")]
    public GameH2A_SO gameData;
+   public GameH2A_SO[] gameDataArray;
    public GameObject LineParent;
    public LineRenderer linePrefab;
    public Ball ballPrefab;
@@ -79,6 +80,13 @@ public class GameController : Singleton<GameController>
                Destroy(holder.GetChild(0).gameObject);
           }
      }
+     DrawLine();
+     CreateBall();
+   }
+
+   public void SetGameWeekData (int week)
+   {
+     gameData = gameDataArray[week];
      DrawLine();
      CreateBall();
    }
