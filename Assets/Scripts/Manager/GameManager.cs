@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour,ISaveable
 {
     private Dictionary<string, bool> miniGameStateDict = new Dictionary<string, bool>();
     private GameController currentGame;
@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
         EventHandler.CallGameStateChangeEvent(GameState.GamePlay);
+
+        // 保存数据
+        ISaveable saveable = this;
+        saveable.SaveableRegister();
     }
     
     private void OnAfterSceneLoadEvent ()
@@ -51,4 +55,18 @@ public class GameManager : MonoBehaviour
     {
         miniGameStateDict[gameName] = true;
     }
+
+  public GameSaveData GenerateSaveData()
+  {
+    GameSaveData saveData =new GameSaveData();
+    saveData.gameweek = this.gameWeek;
+    saveData.miniGameStateDict = this.miniGameStateDict;
+    return saveData;
+  }
+
+  public void RestoreGameData(GameSaveData saveData)
+  {
+    this.gameWeek = saveData.gameweek;
+    this.miniGameStateDict = saveData.miniGameStateDict;
+  }
 }

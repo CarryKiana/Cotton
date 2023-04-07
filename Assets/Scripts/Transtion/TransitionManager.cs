@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class TransitionManager : Singleton<TransitionManager>
+public class TransitionManager : Singleton<TransitionManager>, ISaveable
 {
     public string startScene;
     public CanvasGroup fadeCanvasGroup;
@@ -10,9 +10,10 @@ public class TransitionManager : Singleton<TransitionManager>
 
     private bool canTransition;
 
-    // private void Start() {
-    //     StartCoroutine(TransitionToScene(string.Empty, startScene));
-    // }
+    private void Start() {
+        ISaveable saveable = this;
+        saveable.SaveableRegister();
+    }
     private void OnEnable ()
     {
         EventHandler.GameStateChangeEvent += OnGameStateChangeEvent;
@@ -62,4 +63,16 @@ public class TransitionManager : Singleton<TransitionManager>
         fadeCanvasGroup.blocksRaycasts = false;
         isFade = false;
     }
+
+  public GameSaveData GenerateSaveData()
+  {
+    GameSaveData saveData = new GameSaveData();
+    saveData.currentScene = SceneManager.GetActiveScene().name;
+    return saveData;
+  }
+
+  public void RestoreGameData(GameSaveData saveData)
+  {
+    Transtion("Menu", saveData.currentScene);
+  }
 }

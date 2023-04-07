@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : Singleton<InventoryManager>
+public class InventoryManager : Singleton<InventoryManager>,ISaveable
 {
     public ItemDataList_SO itemData;
     [SerializeField] private List<ItemName> itemList = new List<ItemName>();
@@ -25,6 +25,12 @@ public class InventoryManager : Singleton<InventoryManager>
         EventHandler.ChangeItemEvent -= OnChangeItemEvent;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+    }
+
+    private void Start()
+    {
+        ISaveable saveable = this;
+        saveable.SaveableRegister();
     }
     private void OnStartNewGameEvent (int obj)
     {
@@ -72,4 +78,16 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+
+  public GameSaveData GenerateSaveData()
+  {
+    GameSaveData saveData = new GameSaveData();
+    saveData.itemList = this.itemList;
+    return saveData;
+  }
+
+  public void RestoreGameData(GameSaveData saveData)
+  {
+    this.itemList = saveData.itemList;
+  }
 }
